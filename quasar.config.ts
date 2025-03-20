@@ -3,6 +3,7 @@
 
 import { defineConfig } from '#q-app/wrappers';
 import { fileURLToPath } from 'node:url';
+import path from 'path';
 
 export default defineConfig((ctx) => {
   return {
@@ -19,7 +20,7 @@ export default defineConfig((ctx) => {
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#css
     css: [
-      'app.scss'
+      '~/src/app/css/app.scss'
     ],
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
@@ -36,8 +37,49 @@ export default defineConfig((ctx) => {
       'material-icons', // optional, you are not bound to it
     ],
 
+    sourceFiles: {
+      rootComponent: 'App.vue',
+      router: 'router/index.ts',
+      store: 'stores/index.ts'
+    },
+
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#build
     build: {
+
+      sassVariables: '~/src/app/css/quasar-variables.sass',
+
+      alias: {
+        '@': path.join(__dirname, './src'),
+        src: path.join(__dirname, './src'),
+        App: path.join(__dirname, './src/app'),
+        app: path.join(__dirname, './src/app'),
+        '#app': path.join(__dirname, './src/app'),
+        Entities: path.join(__dirname, './src/entities'),
+        entities: path.join(__dirname, './src/entities'),
+        '#entities': path.join(__dirname, './src/entities'),
+        Features: path.join(__dirname, './src/features'),
+        features: path.join(__dirname, './src/features'),
+        '#features': path.join(__dirname, './src/features'),
+        Pages: path.join(__dirname, './src/pages'),
+        pages: path.join(__dirname, './src/pages'),
+        '#pages': path.join(__dirname, './src/pages'),
+        Shared: path.join(__dirname, './src/shared'),
+        shared: path.join(__dirname, './src/shared'),
+        '#shared': path.join(__dirname, './src/shared'),
+        Widgets: path.join(__dirname, './src/widgets'),
+        widgets: path.join(__dirname, './src/widgets'),
+        '#widgets': path.join(__dirname, './src/widgets'),
+        Layouts: path.join(__dirname, './src/shared/layouts'),
+        layouts: path.join(__dirname, './src/shared/layouts'),
+        '#layouts': path.join(__dirname, './src/shared/layouts'),
+        Components: path.join(__dirname, './src/shared/components'),
+        components: path.join(__dirname, './src/shared/components'),
+        '#components': path.join(__dirname, './src/shared/components'),
+        Assets: path.join(__dirname, './src/shared/assets'),
+        assets: path.join(__dirname, './src/shared/assets'),
+        '#assets': path.join(__dirname, './src/shared/assets'),
+      },
+
       target: {
         browser: [ 'es2022', 'firefox115', 'chrome115', 'safari14' ],
         node: 'node20'
@@ -67,7 +109,7 @@ export default defineConfig((ctx) => {
 
       // extendViteConf (viteConf) {},
       // viteVuePluginOptions: {},
-      
+
       vitePlugins: [
         ['@intlify/unplugin-vue-i18n/vite', {
           // if you want to use Vue I18n Legacy API, you need to set `compositionOnly: false`

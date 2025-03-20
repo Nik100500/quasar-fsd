@@ -42,6 +42,17 @@ export default defineConfigWithVueTs(
         'error',
         { prefer: 'type-imports' }
       ],
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['features/*/*', 'entities/*/*'],
+              message: 'Запрещен кросс-слойный импорт. Используйте публичный API слоев.'
+            }
+          ]
+        }
+      ]
     }
   },
   // https://github.com/vuejs/eslint-config-typescript
